@@ -18,6 +18,7 @@ const requestNews = () => {
 }
 
 const receiveNews = (data) => {
+  console.log('reducer receive news')
   return {
     payload: {
       articles: data,
@@ -38,7 +39,7 @@ export const fetchNews = () => (dispatch) => {
   dispatch(requestNews())
   return axios.get(INIT_NEWS_URL)
     .then((response)=> {
-        return response.data.articles
+        return response.data.hits
     })
     .then((news) => {
       return dispatch(receiveNews(news))
@@ -55,7 +56,8 @@ export const updateArticlesChunk = (articlesVisible) => (dispatch) => {
   })
 }
 
-export const changeSorting = (sortType, sortOrder='desc') => (dispatch) => {
+export const changeSorting = (sortType, sortOrder) => (dispatch) => {
+  console.log('change sorting')
   return dispatch({
     payload: {
       sortOrder,

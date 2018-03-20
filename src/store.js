@@ -3,13 +3,17 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducers from './modules/reducers'
-import { browserResize as screenResize } from './modules/home/actionCreators' 
 import loggerMiddleware from './middlewares/logger'
 
 export const history = createHistory()
 
 //Initial state
-const initialState = {}
+const initialState = {
+  sort: {
+    sortOrder: 'none',
+    sortType: 'none', 
+  },
+}
 
 const enhancers = []
 const middleware = [
