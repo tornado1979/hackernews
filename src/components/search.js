@@ -1,15 +1,5 @@
 import React, { Component } from 'react'
 
-/*export default ({onKeyUp}) => (
-  <div className="input-group mb-3 searchBox">
-    <input type="text" 
-    className="form-control" 
-    placeholder="search news..." 
-    aria-label="search news..."
-    onKeyUp={(ev)=> onKeyUp(ev)} ref="searchInput"/>
-  </div>
-)*/
-
 class Search extends Component{
   constructor(props){
     super(props)
@@ -18,7 +8,6 @@ class Search extends Component{
 
   updateSearch(){
     var searchValue = this.refs.searchbox.value;
-    console.log('search value', searchValue)
     this.props.onKeyUp(searchValue)
   }
 

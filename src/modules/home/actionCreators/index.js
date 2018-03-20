@@ -35,8 +35,10 @@ const error = (err) => {
 }
 
 export const fetchNews = (searchString=null) => (dispatch) => {
+
   dispatch(requestNews())
-  const ENDPOINT_URL = !searchString ? INIT_NEWS_URL : SEARCH_NEWS_URL
+
+  const ENDPOINT_URL = !searchString ? INIT_NEWS_URL : `${INIT_NEWS_URL}&query=${searchString}`
   return axios.get(ENDPOINT_URL)
     .then((response)=> {
         return response.data.hits

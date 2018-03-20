@@ -54,8 +54,15 @@ class Home extends Component {
 
   //search articles
   searchArticles(searchString){
+    const {
+      fetchNews,
+    } = this.props
+
     //search string
-    fetchNews(searchString)
+    if(searchString !== ''){
+      fetchNews(searchString)
+    }
+  
   }
 
   //Change the articles sort type & order
@@ -113,10 +120,11 @@ class Home extends Component {
 
         return(
           <div className="my-container">
-            {isFetching && <div className="my-row">
+            {<div className="my-row">
               <div className="col">
                 {/* progress bar */}
-                <Loader progress={1} />
+                {isFetching && <Loader progress={1} />}
+                {!isFetching && <div style={{'height': '15px'}}></div>}
               </div>
             </div>}
             <div className="my-row">
