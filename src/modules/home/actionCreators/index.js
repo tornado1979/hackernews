@@ -1,5 +1,5 @@
 import axios from "axios";
-import { INIT_NEWS_URL } from '../../../constants'
+import { INIT_NEWS_URL, SEARCH_NEWS_URL } from '../../../constants'
 
 //action costants
 import { 
@@ -18,7 +18,6 @@ const requestNews = () => {
 }
 
 const receiveNews = (data) => {
-  console.log('reducer receive news')
   return {
     payload: {
       articles: data,
@@ -35,9 +34,10 @@ const error = (err) => {
     }
 }
 
-export const fetchNews = () => (dispatch) => {
+export const fetchNews = (searchString=null) => (dispatch) => {
   dispatch(requestNews())
-  return axios.get(INIT_NEWS_URL)
+  const ENDPOINT_URL = !searchString ? INIT_NEWS_URL : SEARCH_NEWS_URL
+  return axios.get(ENDPOINT_URL)
     .then((response)=> {
         return response.data.hits
     })
@@ -57,7 +57,6 @@ export const updateArticlesChunk = (articlesVisible) => (dispatch) => {
 }
 
 export const changeSorting = (sortType, sortOrder) => (dispatch) => {
-  console.log('change sorting')
   return dispatch({
     payload: {
       sortOrder,

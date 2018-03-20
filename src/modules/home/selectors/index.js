@@ -64,7 +64,6 @@ export const sortArticles = createSelector (
           .reverse()
       }
     } else {
-      console.log('reach here...?')
       return []
     }
   }

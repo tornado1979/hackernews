@@ -20,12 +20,14 @@ import './css/index.scss'
 //import components
 import CustomButton from '../../components/customButton'
 import Loader from '../../components/loader'
+import SearchBox from '../../components/search'
 
 
 class Home extends Component {
   constructor(props){
     super(props)
     this.loadMoreArticles = this.loadMoreArticles.bind(this)
+    this.searchArticles = this.searchArticles.bind(this)
   }
   //When component mount, it updates the state with the news and with the init
   // number of Articles (10)
@@ -48,6 +50,12 @@ class Home extends Component {
     //dispatch actions to fetch 10 more articles
     fetchNews()
     updateArticlesChunk(currentArticlesDiplayed+10)
+  }
+
+  //search articles
+  searchArticles(searchString){
+    //search string
+    fetchNews(searchString)
   }
 
   //Change the articles sort type & order
@@ -93,6 +101,7 @@ class Home extends Component {
           })
         }
         
+        //move to separate component
         const sortOrderDropDown =
           <select className="sortOrderBox" onChange={(event ) => this.changeArticlesSorting(event)}>
             <option value="none,none"></option>
@@ -101,7 +110,6 @@ class Home extends Component {
             <option value="title,asc">Title asc</option>
             <option value="title,desc">Title desc</option>
           </select>
-
 
         return(
           <div className="my-container">
@@ -112,9 +120,13 @@ class Home extends Component {
               </div>
             </div>}
             <div className="my-row">
-             <div className="col">
-              {sortOrderDropDown}
-             </div>
+              <div className="col">
+                {sortOrderDropDown}
+              </div>
+              <div className="col">
+                <SearchBox
+                  onKeyUp={this.searchArticles}/>
+              </div>
             </div>
             <div className="my-row">
               {vals}
@@ -151,5 +163,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,null,
+  { withRef: true }
 )(Home)
