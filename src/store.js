@@ -39,8 +39,4 @@ const store = createStore(
     composedEnhancers
 )
 
-window.addEventListener('resize', () => {
-    store.dispatch(screenResize({innerHeight: window.innerHeight, innerWidth: window.innerWidth}))
-});
-
 export default store

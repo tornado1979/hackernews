@@ -1,0 +1,1 @@
+export const INIT_NEWS_URL = `http://hn.algolia.com/api/v1/search?tags=front_page`
