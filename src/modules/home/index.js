@@ -23,7 +23,6 @@ import Loader from '../../components/loader'
 import SearchBox from '../../components/search'
 import Reload from '../../components/reload'
 
-
 class Home extends Component {
   constructor(props){
     super(props)
@@ -61,7 +60,7 @@ class Home extends Component {
     } = this.props
 
     //search string
-      fetchNews(searchString)
+    fetchNews(searchString)
   }
 
   //clear search text and fetch all news
@@ -110,8 +109,8 @@ class Home extends Component {
           let className = `my-content-1`
 
           return (
-            <div className={className} key={idx}>
-              <div className="card">
+            <div className={className} key={idx} >
+              <div className="card" onClick={() => window.location.href=article.url }>
                 <div className="card-body">
                   <p className="card-title">{idx+1}. {article.title}</p>
                   <p className="card-date">{article.points} points by {article.author} | comments {article.num_comments} | {articleDate}</p>
