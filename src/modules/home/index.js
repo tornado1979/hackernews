@@ -190,6 +190,5 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,null,
-  { withRef: true }
+  mapDispatchToProps,
 )(Home)

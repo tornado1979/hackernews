@@ -1,5 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+
+import {
+  resetSearch,
+  updateSearch,
+} from './actionCreators'
+
+import {
+  getSearchText,
+} from './selectors'
 
 class Search extends Component{
   constructor(props){
@@ -15,6 +26,9 @@ class Search extends Component{
 
     var searchValue = this.refs.searchbox.value;
     if(searchValue.length > minSearchChars){
+      //dispatch action UPDATE_SEARCH
+      this.props.updateSearch(searchValue)
+      //call action to fetch news
       this.props.searchArticles(searchValue)
     }
   }
@@ -22,13 +36,17 @@ class Search extends Component{
   clearSearchString(){
     let inputSearch = document.getElementById('inputSearch')
     inputSearch.value=''
+    this.props.resetSearch()
     this.props.clearSearchString()
   }
 
   render(){
-    const hasText = document.getElementById('inputSearch') 
-    && document.getElementById('inputSearch').value.length > 0
-    console.log('hasText:', hasText)
+    const {
+      searchText,
+    } = this.props
+
+    const hasText = searchText.length > 0
+
     return(
       <div className="input-group mb-3 searchBox">
         <input type="text" id="inputSearch"
@@ -47,6 +65,18 @@ Search.propTypes = {
   searchArticles: PropTypes.func.isRequired,
   clearSearchString: PropTypes.func.isRequired,
   minSearchChars: PropTypes.number.isRequired,
+  resetSearch: PropTypes.func.isRequired,
+  searchText: PropTypes.string.isRequired,
+  updateSearch: PropTypes.func.isRequired,
 }
 
-export default Search
+const mapStateToProps = (state) => ({
+  searchText: getSearchText(state),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  resetSearch,
+  updateSearch,
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
