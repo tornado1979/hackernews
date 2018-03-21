@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Search extends Component{
   constructor(props){
@@ -8,8 +9,14 @@ class Search extends Component{
   }
 
   updateSearch(){
+    const {
+      minSearchChars,
+    } = this.props
+
     var searchValue = this.refs.searchbox.value;
-    this.props.searchArticles(searchValue)
+    if(searchValue.length > minSearchChars){
+      this.props.searchArticles(searchValue)
+    }
   }
 
   clearSearchString(){
@@ -34,6 +41,12 @@ class Search extends Component{
       </div>     
     )
   }
+}
+
+Search.propTypes = {
+  searchArticles: PropTypes.func.isRequired,
+  clearSearchString: PropTypes.func.isRequired,
+  minSearchChars: PropTypes.number.isRequired,
 }
 
 export default Search

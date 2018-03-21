@@ -38,7 +38,6 @@ class Home extends Component {
     this.props.updateArticlesChunk(initChunk) // dispatch action to update the articlesChunks
   }
 
-
   //Load more articles on the blowser
   loadMoreArticles(currentArticlesDiplayed, ev){
     ev.preventDefault()
@@ -60,9 +59,7 @@ class Home extends Component {
     } = this.props
 
     //search string
-    if(searchString !== ''){
       fetchNews(searchString)
-    }
   }
 
   //clear search text and fetch all news
@@ -143,7 +140,8 @@ class Home extends Component {
               <div className="col">
                 <SearchBox
                   searchArticles={this.searchArticles}
-                  clearSearchString={this.clearSearchString}/>
+                  clearSearchString={this.clearSearchString}
+                  minSearchChars={3} />
               </div>
             </div>
             <div className="my-row">
