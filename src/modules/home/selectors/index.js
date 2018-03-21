@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-import moment from 'moment'
 import _ from 'lodash'
 
 //get the sort obj
