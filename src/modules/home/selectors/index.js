@@ -41,27 +41,27 @@ export const sortArticles = createSelector (
       if(sortOrder==="none"){
         return articles
       }
-      //sort asc
-      if(sortOrder === 'asc'){
+      //sort desc
+      if(sortOrder === 'desc'){
         return _.sortBy(articles, function(o) 
         {
           if(sortType === 'date'){
-            return new moment(o.created_at)
+            return new Date(o.created_at)
           }else if(sortType === 'title'){
             return o.title
           }
         })
-      //sort desc
-      }else if(sortOrder === 'desc'){
+        .reverse()
+      //sort asc
+      }else if(sortOrder === 'asc'){
         return _.sortBy(articles, function(o) 
           {
             if(sortType === 'date'){
-              return new moment(o.created_at)
+              return new Date(o.created_at)
             }else if(sortType === 'title'){
               return o.title
             }
           })
-          .reverse()
       }
     } else {
       return []
