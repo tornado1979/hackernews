@@ -15,6 +15,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ## About
+* I used the `create-reac-app` biolerplate to develop this project, because it has many contributors maintening it/updating it, they release new version quite often, its structure is simple as it has only one page just to show that react is up and running, and the dev is free to add as many dependencies as he needs for the `to-be` project.
+
 * It is a SPA web app that uses https://hn.algolia.com/api API to fetch news to the client, and show them to the end user.
 * This API gives only 50 articles on each request, based on this param: &`hitsPerPage=50`.
 * Functionalities: 
@@ -50,25 +52,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     sort: {sortOrder: "none", sortType: "none"},
   }
   ```
-* On the top of the page, there is a elect box that the user can chose the 
+* On the top of the page, there is a select box that the user can chose the 
 order type (Date,Title) and the sort order (Ascending,Descending).
-* The initial displayed articles are 7 and the news are displayed in chunks of 7 articles, each time the user clicks 'load more news..' button.
+* The initial displayed articles are 10 and the news are displayed in chunks of 10 articles, each time the user clicks 'load more news..' button.
 
 ## Technical Workflow
 1. The app loads and the store is created and initialised.
-2. all the actions follow this procedure:
+2. All the actions follow this procedure:
  action -> actionCreator -> reducer -> update the state <- selector gets state data -> update the component
-2. for style i use bootstrap4 and sass. I overrided the default breakpoins to create these breakpoints:
-```
-  $grid-breakpoints: (
-    xs: 0,
-    sm: 320px,
-    md: 510px,
-    lg: 780px,
-    xl: 1000px
-  );
-```
-  The scss files are translated to pute css files with the help of webpack:
+2. For style i use bootstrap4 and sass. As for the webpack to convert the scss custom files to css, i added this snipet, on the webpack config file.
   ```
   {
     test: /\.scss$/,
@@ -88,46 +80,46 @@ webpack, eslint etc.
 
 The structure of the project is this:
 ```
-news/
-  README.md
-  build/
-    minimized code+styles
-  config/
-  node_modules/
-  package.json
+app/
+  config/ <!--webpack config files-->
+  node_modules/ <!--dependencies-->
   public/
-    index.html
-    favicon.ico
   scripts/
-    build.js
-    start.js
-    test.js
-  src/
-    modules/
-      home/
-        actionCreators/
-          index.js
-        actions/
-          index.js
-        css/
-          index.scss
-        reducers/
-          news.js
-        selectors/
-          index.js
-        index.js
-      reducers/
-        index.js
-      App.js
-      App.css
-      App.test.js
-      index.css
+  src/  <!-- main project code -->
+  components/
+    actionCreators/
       index.js
-      logo.svg
-      registerServiceWorker.js
-      store.js
-    packagejson
-    README.md
+    actions/
+      index.js
+    reducers/
+      index.js
+    selectors/
+      index.js
+    customButton.js <!-- button component for 'load more' -->
+    loader.js <!-- loader component -->
+    reload.js <!-- button for reload the news -->
+    root.js <!-- root component that keeps the app routes-->
+    search.js <!-- search componend-->
+  middlewares/
+    logger.js <!-- logger middleware forwatching the actions & state-->
+  modules/
+    home/
+      actionCreators/
+        index.js
+      action/
+        index.js
+      css/
+        index.scss
+      reducers/
+        news.js
+      selectors/
+        index.js
+      index.js
+      reducers/
+        index.js <!-- here i use the combineReducers -->
+    constants.js <!-- constants like the api endpoint-->
+    index.js
+    store.js
 ```
 
 ## Run local
@@ -155,7 +147,7 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](#running-tests) for more information.
-
+* the unit tests are missing, i have to add them.
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
@@ -179,4 +171,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Todo
 
 * unit tests on actionCreators, reducers, selectors
-* add more pages with React Router
+* maybe on the progress loader i need to add a modal div so to prevent the user from 
+writing and making requests to the server simultaneously.
