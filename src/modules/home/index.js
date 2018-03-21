@@ -21,6 +21,7 @@ import './css/index.scss'
 import CustomButton from '../../components/customButton'
 import Loader from '../../components/loader'
 import SearchBox from '../../components/search'
+import Reload from '../../components/reload'
 
 
 class Home extends Component {
@@ -29,6 +30,7 @@ class Home extends Component {
     this.loadMoreArticles = this.loadMoreArticles.bind(this)
     this.searchArticles = this.searchArticles.bind(this)
     this.clearSearchString = this.clearSearchString.bind(this)
+    this.reload = this.reload.bind(this)
   }
   //When component mount, it updates the state with the news and with the init
   // number of Articles (10)
@@ -69,6 +71,11 @@ class Home extends Component {
     } = this.props
 
     fetchNews()
+  }
+
+  //reload articles
+  reload(){
+    this.clearSearchString()
   }
 
   //Change the articles sort type & order
@@ -134,14 +141,18 @@ class Home extends Component {
               </div>
             </div>}
             <div className="my-row">
-              <div className="col">
+              <div className="sortordercol">
                 {sortOrderDropDown}
               </div>
-              <div className="col">
+              <div className="searchcol">
                 <SearchBox
                   searchArticles={this.searchArticles}
                   clearSearchString={this.clearSearchString}
                   minSearchChars={3} />
+              </div>
+              <div className="reloadcol">
+                <Reload 
+                reload={this.reload}/>
               </div>
             </div>
             <div className="my-row">
