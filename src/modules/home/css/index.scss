@@ -67,3 +67,15 @@ body {
 .searchBox {
   margin-top: 20px;
 }
+
+.searchBox .deleteText {
+  position: absolute;
+  display: block;
+  color: grey;
+  top: 5px;
+  right: 0px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  z-index: 3;
+}

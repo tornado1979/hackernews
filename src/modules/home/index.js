@@ -28,6 +28,7 @@ class Home extends Component {
     super(props)
     this.loadMoreArticles = this.loadMoreArticles.bind(this)
     this.searchArticles = this.searchArticles.bind(this)
+    this.clearSearchString = this.clearSearchString.bind(this)
   }
   //When component mount, it updates the state with the news and with the init
   // number of Articles (10)
@@ -62,7 +63,15 @@ class Home extends Component {
     if(searchString !== ''){
       fetchNews(searchString)
     }
-  
+  }
+
+  //clear search text and fetch all news
+  clearSearchString(){
+    const {
+      fetchNews
+    } = this.props
+
+    fetchNews()
   }
 
   //Change the articles sort type & order
@@ -133,7 +142,8 @@ class Home extends Component {
               </div>
               <div className="col">
                 <SearchBox
-                  onKeyUp={this.searchArticles}/>
+                  searchArticles={this.searchArticles}
+                  clearSearchString={this.clearSearchString}/>
               </div>
             </div>
             <div className="my-row">
