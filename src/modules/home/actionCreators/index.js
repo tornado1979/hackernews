@@ -1,5 +1,5 @@
 import axios from "axios";
-import { INIT_NEWS_URL, SEARCH_NEWS_URL } from '../../../constants'
+import { INIT_NEWS_URL } from '../../../constants'
 
 //action costants
 import { 
